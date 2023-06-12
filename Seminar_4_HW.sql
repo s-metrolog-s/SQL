@@ -4,17 +4,21 @@ USE seminar4;
 	1. Подсчитать общее количество лайков, которые получили пользователи младше 12 лет.
 */
 
-SELECT COUNT(*) FROM likes l
+SELECT COUNT(*) AS 'Лайки младше 12 лет' FROM likes l
 JOIN 
-(SELECT * FROM `profiles` WHERE birthday < 2011-01-01) AS p 
+	(SELECT * FROM `profiles` WHERE birthday > '2011-01-01') AS p 
 ON l.user_id = p.user_id;
-
-SELECT * FROM `profiles` WHERE birthday BETWEEN 2011-01-01 AND 2022-12-31;
-
 
 /*
 	2. Определить кто больше поставил лайков (всего): мужчины или женщины.
 */
+
+SELECT
+	p.gender AS 'Пол',
+    COUNT(*) AS 'Количество лайков'
+FROM `profiles` p
+JOIN likes l ON p.user_id = l.user_id
+GROUP BY gender;
 
 /*
 	3. Вывести всех пользователей, которые не отправляли сообщения.
