@@ -24,6 +24,14 @@ GROUP BY gender;
 	3. Вывести всех пользователей, которые не отправляли сообщения.
 */
 
+SELECT
+	id,
+    CONCAT(firstname, ' ', lastname) AS 'Пользователь',
+    email
+FROM users u
+WHERE id NOT IN 
+	(SELECT from_user_id FROM messages);
+
 /*
 	4. (по желанию)* Пусть задан некоторый пользователь. Из всех друзей
 	этого пользователя найдите человека, который больше всех написал
